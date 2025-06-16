@@ -1,0 +1,133 @@
+[2025-06-16T08:53:48.161+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-16T08:53:48.235+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T08:50:48.482501+00:00 [queued]>
+[2025-06-16T08:53:48.247+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T08:50:48.482501+00:00 [queued]>
+[2025-06-16T08:53:48.248+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-06-16T08:53:48.279+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): submeter_job_spark_seguro> on 2025-06-16 08:50:48.482501+00:00
+[2025-06-16T08:53:48.288+0000] {standard_task_runner.py:63} INFO - Started process 1845 to run task
+[2025-06-16T08:53:48.294+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'dag_04_processamento_spark_seguro_v1', 'submeter_job_spark_seguro', 'manual__2025-06-16T08:50:48.482501+00:00', '--job-id', '17', '--raw', '--subdir', 'DAGS_FOLDER/dag_04_processamento_spark_seguro_v1.py', '--cfg-path', '/tmp/tmpmd5m_yi0']
+[2025-06-16T08:53:48.298+0000] {standard_task_runner.py:91} INFO - Job 17: Subtask submeter_job_spark_seguro
+[2025-06-16T08:53:48.422+0000] {task_command.py:426} INFO - Running <TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T08:50:48.482501+00:00 [running]> on host 0f40c05f786f
+[2025-06-16T08:53:48.607+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='dag_04_processamento_spark_seguro_v1' AIRFLOW_CTX_TASK_ID='submeter_job_spark_seguro' AIRFLOW_CTX_EXECUTION_DATE='2025-06-16T08:50:48.482501+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-16T08:50:48.482501+00:00'
+[2025-06-16T08:53:48.608+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-16T08:53:48.640+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-06-16T08:53:48.641+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python /opt/airflow/scripts/examples/12-processa_vendas.py']
+[2025-06-16T08:53:48.668+0000] {subprocess.py:86} INFO - Output:
+[2025-06-16T08:53:50.216+0000] {subprocess.py:93} INFO - 2025-06-16 08:53:50,215 - INFO - === Iniciando Pipeline de Processamento de Vendas ===
+[2025-06-16T08:53:50.216+0000] {subprocess.py:93} INFO - 2025-06-16 08:53:50,216 - INFO - Iniciando a sessão Spark...
+[2025-06-16T08:53:50.871+0000] {subprocess.py:93} INFO - WARNING: Using incubator modules: jdk.incubator.vector
+[2025-06-16T08:53:53.957+0000] {subprocess.py:93} INFO - Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+[2025-06-16T08:53:53.958+0000] {subprocess.py:93} INFO - Setting default log level to "WARN".
+[2025-06-16T08:53:53.961+0000] {subprocess.py:93} INFO - To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+[2025-06-16T08:53:55.898+0000] {subprocess.py:93} INFO - 25/06/16 08:53:55 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-06-16T08:54:04.872+0000] {subprocess.py:93} INFO - 2025-06-16 08:54:04,872 - INFO - Sessão Spark criada com sucesso.
+[2025-06-16T08:54:04.873+0000] {subprocess.py:93} INFO - 2025-06-16 08:54:04,872 - INFO - AVISO: Criando um DataFrame de exemplo para demonstração.
+[2025-06-16T08:54:06.956+0000] {subprocess.py:93} INFO - 2025-06-16 08:54:06,956 - INFO - DataFrame de exemplo criado com sucesso.
+[2025-06-16T08:54:06.957+0000] {subprocess.py:93} INFO - 2025-06-16 08:54:06,956 - INFO - Processando para a camada Trusted (Silver)...
+[2025-06-16T08:54:07.345+0000] {subprocess.py:93} INFO - 2025-06-16 08:54:07,345 - ERROR - Erro durante o processamento: An error occurred while calling o62.parquet.
+[2025-06-16T08:54:07.347+0000] {subprocess.py:93} INFO - : java.lang.RuntimeException: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+[2025-06-16T08:54:07.348+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2737)
+[2025-06-16T08:54:07.349+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem.getFileSystemClass(FileSystem.java:3569)
+[2025-06-16T08:54:07.350+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3612)
+[2025-06-16T08:54:07.351+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:172)
+[2025-06-16T08:54:07.352+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3716)
+[2025-06-16T08:54:07.353+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3667)
+[2025-06-16T08:54:07.354+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:557)
+[2025-06-16T08:54:07.355+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.Path.getFileSystem(Path.java:366)
+[2025-06-16T08:54:07.356+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.execution.datasources.DataSource.makeQualified(DataSource.scala:125)
+[2025-06-16T08:54:07.357+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.execution.datasources.DataSource.planForWritingFileFormat(DataSource.scala:468)
+[2025-06-16T08:54:07.357+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.execution.datasources.DataSource.planForWriting(DataSource.scala:554)
+[2025-06-16T08:54:07.358+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.classic.DataFrameWriter.saveToV1Source(DataFrameWriter.scala:273)
+[2025-06-16T08:54:07.359+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.classic.DataFrameWriter.saveInternal(DataFrameWriter.scala:241)
+[2025-06-16T08:54:07.359+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.classic.DataFrameWriter.save(DataFrameWriter.scala:118)
+[2025-06-16T08:54:07.360+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.DataFrameWriter.parquet(DataFrameWriter.scala:369)
+[2025-06-16T08:54:07.361+0000] {subprocess.py:93} INFO - 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2025-06-16T08:54:07.364+0000] {subprocess.py:93} INFO - 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+[2025-06-16T08:54:07.365+0000] {subprocess.py:93} INFO - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2025-06-16T08:54:07.366+0000] {subprocess.py:93} INFO - 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+[2025-06-16T08:54:07.367+0000] {subprocess.py:93} INFO - 	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+[2025-06-16T08:54:07.368+0000] {subprocess.py:93} INFO - 	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+[2025-06-16T08:54:07.368+0000] {subprocess.py:93} INFO - 	at py4j.Gateway.invoke(Gateway.java:282)
+[2025-06-16T08:54:07.369+0000] {subprocess.py:93} INFO - 	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+[2025-06-16T08:54:07.370+0000] {subprocess.py:93} INFO - 	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+[2025-06-16T08:54:07.371+0000] {subprocess.py:93} INFO - 	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+[2025-06-16T08:54:07.372+0000] {subprocess.py:93} INFO - 	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+[2025-06-16T08:54:07.372+0000] {subprocess.py:93} INFO - 	at java.base/java.lang.Thread.run(Thread.java:840)
+[2025-06-16T08:54:07.373+0000] {subprocess.py:93} INFO - Caused by: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+[2025-06-16T08:54:07.374+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.conf.Configuration.getClassByName(Configuration.java:2641)
+[2025-06-16T08:54:07.375+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2735)
+[2025-06-16T08:54:07.376+0000] {subprocess.py:93} INFO - 	... 26 more
+[2025-06-16T08:54:07.381+0000] {subprocess.py:93} INFO - 
+[2025-06-16T08:54:07.382+0000] {subprocess.py:93} INFO - 2025-06-16 08:54:07,345 - INFO - Sessão Spark encerrada.
+[2025-06-16T08:54:07.458+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-06-16T08:54:07.458+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/examples/12-processa_vendas.py", line 100, in <module>
+[2025-06-16T08:54:07.461+0000] {subprocess.py:93} INFO -     main()
+[2025-06-16T08:54:07.462+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/examples/12-processa_vendas.py", line 92, in main
+[2025-06-16T08:54:07.464+0000] {subprocess.py:93} INFO -     process_sales_data(spark, caminho_trusted, caminho_refined)
+[2025-06-16T08:54:07.465+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/examples/12-processa_vendas.py", line 55, in process_sales_data
+[2025-06-16T08:54:07.468+0000] {subprocess.py:93} INFO -     df_trusted.write.mode("overwrite").parquet(output_path_trusted)
+[2025-06-16T08:54:07.468+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/sql/readwriter.py", line 2003, in parquet
+[2025-06-16T08:54:07.469+0000] {subprocess.py:93} INFO -     self._jwrite.parquet(path)
+[2025-06-16T08:54:07.470+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/py4j/java_gateway.py", line 1362, in __call__
+[2025-06-16T08:54:07.477+0000] {subprocess.py:93} INFO -     return_value = get_return_value(
+[2025-06-16T08:54:07.478+0000] {subprocess.py:93} INFO -                    ^^^^^^^^^^^^^^^^^
+[2025-06-16T08:54:07.479+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/errors/exceptions/captured.py", line 282, in deco
+[2025-06-16T08:54:07.480+0000] {subprocess.py:93} INFO -     return f(*a, **kw)
+[2025-06-16T08:54:07.481+0000] {subprocess.py:93} INFO -            ^^^^^^^^^^^
+[2025-06-16T08:54:07.482+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/py4j/protocol.py", line 327, in get_return_value
+[2025-06-16T08:54:07.483+0000] {subprocess.py:93} INFO -     raise Py4JJavaError(
+[2025-06-16T08:54:07.484+0000] {subprocess.py:93} INFO - py4j.protocol.Py4JJavaError: An error occurred while calling o62.parquet.
+[2025-06-16T08:54:07.484+0000] {subprocess.py:93} INFO - : java.lang.RuntimeException: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+[2025-06-16T08:54:07.486+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2737)
+[2025-06-16T08:54:07.486+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem.getFileSystemClass(FileSystem.java:3569)
+[2025-06-16T08:54:07.487+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3612)
+[2025-06-16T08:54:07.488+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:172)
+[2025-06-16T08:54:07.489+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3716)
+[2025-06-16T08:54:07.490+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3667)
+[2025-06-16T08:54:07.490+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:557)
+[2025-06-16T08:54:07.491+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.fs.Path.getFileSystem(Path.java:366)
+[2025-06-16T08:54:07.492+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.execution.datasources.DataSource.makeQualified(DataSource.scala:125)
+[2025-06-16T08:54:07.494+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.execution.datasources.DataSource.planForWritingFileFormat(DataSource.scala:468)
+[2025-06-16T08:54:07.494+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.execution.datasources.DataSource.planForWriting(DataSource.scala:554)
+[2025-06-16T08:54:07.495+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.classic.DataFrameWriter.saveToV1Source(DataFrameWriter.scala:273)
+[2025-06-16T08:54:07.496+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.classic.DataFrameWriter.saveInternal(DataFrameWriter.scala:241)
+[2025-06-16T08:54:07.497+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.classic.DataFrameWriter.save(DataFrameWriter.scala:118)
+[2025-06-16T08:54:07.497+0000] {subprocess.py:93} INFO - 	at org.apache.spark.sql.DataFrameWriter.parquet(DataFrameWriter.scala:369)
+[2025-06-16T08:54:07.500+0000] {subprocess.py:93} INFO - 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+[2025-06-16T08:54:07.501+0000] {subprocess.py:93} INFO - 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+[2025-06-16T08:54:07.505+0000] {subprocess.py:93} INFO - 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+[2025-06-16T08:54:07.506+0000] {subprocess.py:93} INFO - 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+[2025-06-16T08:54:07.507+0000] {subprocess.py:93} INFO - 	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+[2025-06-16T08:54:07.508+0000] {subprocess.py:93} INFO - 	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+[2025-06-16T08:54:07.509+0000] {subprocess.py:93} INFO - 	at py4j.Gateway.invoke(Gateway.java:282)
+[2025-06-16T08:54:07.510+0000] {subprocess.py:93} INFO - 	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+[2025-06-16T08:54:07.510+0000] {subprocess.py:93} INFO - 	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+[2025-06-16T08:54:07.511+0000] {subprocess.py:93} INFO - 	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:184)
+[2025-06-16T08:54:07.511+0000] {subprocess.py:93} INFO - 	at py4j.ClientServerConnection.run(ClientServerConnection.java:108)
+[2025-06-16T08:54:07.512+0000] {subprocess.py:93} INFO - 	at java.base/java.lang.Thread.run(Thread.java:840)
+[2025-06-16T08:54:07.513+0000] {subprocess.py:93} INFO - Caused by: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+[2025-06-16T08:54:07.513+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.conf.Configuration.getClassByName(Configuration.java:2641)
+[2025-06-16T08:54:07.514+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2735)
+[2025-06-16T08:54:07.515+0000] {subprocess.py:93} INFO - 	... 26 more
+[2025-06-16T08:54:07.516+0000] {subprocess.py:93} INFO - 
+[2025-06-16T08:54:07.517+0000] {subprocess.py:93} INFO - 2025-06-16 08:54:07,471 - INFO - Closing down clientserver connection
+[2025-06-16T08:54:08.100+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-06-16T08:54:08.102+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-16T08:54:08.171+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-06-16T08:54:08.202+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=dag_04_processamento_spark_seguro_v1, task_id=submeter_job_spark_seguro, run_id=manual__2025-06-16T08:50:48.482501+00:00, execution_date=20250616T085048, start_date=20250616T085348, end_date=20250616T085408
+[2025-06-16T08:54:08.272+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 17 for task submeter_job_spark_seguro (Bash command failed. The command returned a non-zero exit code 1.; 1845)
+[2025-06-16T08:54:08.337+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-06-16T08:54:08.388+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-06-16T08:54:08.391+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

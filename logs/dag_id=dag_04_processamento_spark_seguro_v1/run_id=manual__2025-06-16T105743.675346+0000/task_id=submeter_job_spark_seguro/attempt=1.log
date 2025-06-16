@@ -1,0 +1,51 @@
+[2025-06-16T10:57:50.309+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-16T10:57:50.388+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T10:57:43.675346+00:00 [queued]>
+[2025-06-16T10:57:50.401+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T10:57:43.675346+00:00 [queued]>
+[2025-06-16T10:57:50.402+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-06-16T10:57:50.419+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): submeter_job_spark_seguro> on 2025-06-16 10:57:43.675346+00:00
+[2025-06-16T10:57:50.427+0000] {standard_task_runner.py:63} INFO - Started process 575 to run task
+[2025-06-16T10:57:50.434+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'dag_04_processamento_spark_seguro_v1', 'submeter_job_spark_seguro', 'manual__2025-06-16T10:57:43.675346+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/dag_04_processamento_spark_seguro_v1.py', '--cfg-path', '/tmp/tmpes2r030w']
+[2025-06-16T10:57:50.438+0000] {standard_task_runner.py:91} INFO - Job 5: Subtask submeter_job_spark_seguro
+[2025-06-16T10:57:50.548+0000] {task_command.py:426} INFO - Running <TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T10:57:43.675346+00:00 [running]> on host f1202155c8c9
+[2025-06-16T10:57:50.726+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='dag_04_processamento_spark_seguro_v1' AIRFLOW_CTX_TASK_ID='submeter_job_spark_seguro' AIRFLOW_CTX_EXECUTION_DATE='2025-06-16T10:57:43.675346+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-16T10:57:43.675346+00:00'
+[2025-06-16T10:57:50.731+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-16T10:57:50.752+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-06-16T10:57:50.754+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'export PATH="/home/airflow/.local/bin:${PATH}" && spark-submit --jars /opt/airflow/jars/hadoop-aws-3.3.1.jar,/opt/airflow/jars/aws-java-sdk-bundle-1.11.901.jar /opt/airflow/scripts/examples/12-processa_vendas.py']
+[2025-06-16T10:57:50.768+0000] {subprocess.py:86} INFO - Output:
+[2025-06-16T10:57:51.606+0000] {subprocess.py:93} INFO - WARNING: Using incubator modules: jdk.incubator.vector
+[2025-06-16T10:57:55.007+0000] {subprocess.py:93} INFO - 25/06/16 10:57:55 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-06-16T10:57:57.100+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-06-16T10:57:57.101+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/examples/12-processa_vendas.py", line 13, in <module>
+[2025-06-16T10:57:57.106+0000] {subprocess.py:93} INFO -     from plugins.security_system.vault import AirflowSecurityManager
+[2025-06-16T10:57:57.115+0000] {subprocess.py:93} INFO - ModuleNotFoundError: No module named 'plugins'
+[2025-06-16T10:57:57.116+0000] {subprocess.py:93} INFO - 
+[2025-06-16T10:57:57.117+0000] {subprocess.py:93} INFO - During handling of the above exception, another exception occurred:
+[2025-06-16T10:57:57.118+0000] {subprocess.py:93} INFO - 
+[2025-06-16T10:57:57.119+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-06-16T10:57:57.119+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/examples/12-processa_vendas.py", line 16, in <module>
+[2025-06-16T10:57:57.120+0000] {subprocess.py:93} INFO -     sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../plugins')))
+[2025-06-16T10:57:57.123+0000] {subprocess.py:93} INFO -     ^^^
+[2025-06-16T10:57:57.124+0000] {subprocess.py:93} INFO - NameError: name 'sys' is not defined
+[2025-06-16T10:57:57.230+0000] {subprocess.py:93} INFO - 25/06/16 10:57:57 INFO ShutdownHookManager: Shutdown hook called
+[2025-06-16T10:57:57.236+0000] {subprocess.py:93} INFO - 25/06/16 10:57:57 INFO ShutdownHookManager: Deleting directory /tmp/spark-ab68a3bf-7676-4985-a82e-e620167e7e4d
+[2025-06-16T10:57:57.306+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-06-16T10:57:57.307+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-16T10:57:57.336+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-06-16T10:57:57.343+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=dag_04_processamento_spark_seguro_v1, task_id=submeter_job_spark_seguro, run_id=manual__2025-06-16T10:57:43.675346+00:00, execution_date=20250616T105743, start_date=20250616T105750, end_date=20250616T105757
+[2025-06-16T10:57:57.372+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 5 for task submeter_job_spark_seguro (Bash command failed. The command returned a non-zero exit code 1.; 575)
+[2025-06-16T10:57:57.397+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-06-16T10:57:57.428+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-06-16T10:57:57.431+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

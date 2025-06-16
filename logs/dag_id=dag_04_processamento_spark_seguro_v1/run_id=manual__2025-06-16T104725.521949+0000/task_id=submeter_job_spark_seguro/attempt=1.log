@@ -1,0 +1,26 @@
+[2025-06-16T10:47:34.349+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-16T10:47:34.408+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T10:47:25.521949+00:00 [queued]>
+[2025-06-16T10:47:34.421+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T10:47:25.521949+00:00 [queued]>
+[2025-06-16T10:47:34.423+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-06-16T10:47:34.441+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): submeter_job_spark_seguro> on 2025-06-16 10:47:25.521949+00:00
+[2025-06-16T10:47:34.453+0000] {standard_task_runner.py:63} INFO - Started process 193 to run task
+[2025-06-16T10:47:34.459+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'dag_04_processamento_spark_seguro_v1', 'submeter_job_spark_seguro', 'manual__2025-06-16T10:47:25.521949+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/dag_04_processamento_spark_seguro_v1.py', '--cfg-path', '/tmp/tmp6u1tfwqe']
+[2025-06-16T10:47:34.464+0000] {standard_task_runner.py:91} INFO - Job 3: Subtask submeter_job_spark_seguro
+[2025-06-16T10:47:34.582+0000] {task_command.py:426} INFO - Running <TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T10:47:25.521949+00:00 [running]> on host f1202155c8c9
+[2025-06-16T10:47:34.741+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='dag_04_processamento_spark_seguro_v1' AIRFLOW_CTX_TASK_ID='submeter_job_spark_seguro' AIRFLOW_CTX_EXECUTION_DATE='2025-06-16T10:47:25.521949+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-16T10:47:25.521949+00:00'
+[2025-06-16T10:47:34.742+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-16T10:47:34.762+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-06-16T10:47:34.765+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', '/home/airflow/.local/bin/spark-submit --jars /opt/airflow/jars/hadoop-aws-3.3.1.jar,/opt/airflow/jars/aws-java-sdk-bundle-1.11.901.jar /opt/airflow/scripts/examples/12-processa_vendas.py']
+[2025-06-16T10:47:34.779+0000] {subprocess.py:86} INFO - Output:
+[2025-06-16T10:47:35.472+0000] {subprocess.py:93} INFO - WARNING: Using incubator modules: jdk.incubator.vector
+[2025-06-16T10:47:38.171+0000] {subprocess.py:93} INFO - 25/06/16 10:47:38 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-06-16T10:47:40.202+0000] {subprocess.py:93} INFO - 2025-06-16 10:47:40,202 - INFO - === Iniciando Pipeline de Processamento de Vendas ===
+[2025-06-16T10:47:40.203+0000] {subprocess.py:93} INFO - 2025-06-16 10:47:40,202 - ERROR - Credenciais do MinIO não encontradas nas variáveis de ambiente.
+[2025-06-16T10:47:40.294+0000] {subprocess.py:93} INFO - 25/06/16 10:47:40 INFO ShutdownHookManager: Shutdown hook called
+[2025-06-16T10:47:40.305+0000] {subprocess.py:93} INFO - 25/06/16 10:47:40 INFO ShutdownHookManager: Deleting directory /tmp/spark-7e01b69a-1e8e-446a-9544-f88cd2d5c3dc
+[2025-06-16T10:47:40.384+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-06-16T10:47:40.385+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-16T10:47:40.453+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=dag_04_processamento_spark_seguro_v1, task_id=submeter_job_spark_seguro, run_id=manual__2025-06-16T10:47:25.521949+00:00, execution_date=20250616T104725, start_date=20250616T104734, end_date=20250616T104740
+[2025-06-16T10:47:40.507+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-06-16T10:47:40.554+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-06-16T10:47:40.557+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,10 @@
+timestamp,level,dag_id,task_id,user,action,details,compliance_status,risk_level,service,error_message,stack_trace_needed
+2025-06-16T07:57:11.237800,INFO,system,system,airflow_process,set_secret,Segredo 'minio_local_credentials' foi configurado/atualizado.,SUCCESS,INFO,N/A,,False
+2025-06-16T07:57:11.259798,INFO,system,system,airflow_process,set_secret,Segredo 'openweathermap_api_key' foi configurado/atualizado.,SUCCESS,INFO,N/A,,False
+2025-06-16T07:57:11.279123,INFO,system,system,airflow_process,set_secret,Segredo 'postgres_local_credentials' foi configurado/atualizado.,SUCCESS,INFO,N/A,,False
+2025-06-16T08:16:58.312619,INFO,system,system,airflow_process,set_secret,Segredo 'minio_local_credentials' foi configurado/atualizado.,SUCCESS,INFO,N/A,,False
+2025-06-16T08:16:58.333154,INFO,system,system,airflow_process,set_secret,Segredo 'openweathermap_api_key' foi configurado/atualizado.,SUCCESS,INFO,N/A,,False
+2025-06-16T08:16:58.353340,INFO,system,system,airflow_process,set_secret,Segredo 'postgres_local_credentials' foi configurado/atualizado.,SUCCESS,INFO,N/A,,False
+2025-06-16T08:31:56.539846,INFO,system,system,airflow_process,set_secret,Segredo 'minio_local_credentials' foi configurado/atualizado.,SUCCESS,INFO,N/A,,False
+2025-06-16T08:31:56.557257,INFO,system,system,airflow_process,set_secret,Segredo 'openweathermap_api_key' foi configurado/atualizado.,SUCCESS,INFO,N/A,,False
+2025-06-16T08:31:56.574348,INFO,system,system,airflow_process,set_secret,Segredo 'postgres_local_credentials' foi configurado/atualizado.,SUCCESS,INFO,N/A,,False

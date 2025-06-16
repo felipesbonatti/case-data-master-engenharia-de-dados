@@ -1,0 +1,9 @@
+2025-06-16 07:57:11|INFO|security_system.AuditLogger_vFINAL|ACTION: set_secret | DETAILS: Segredo 'minio_local_credentials' foi configurado/atualizado.
+2025-06-16 07:57:11|INFO|security_system.AuditLogger_vFINAL|ACTION: set_secret | DETAILS: Segredo 'openweathermap_api_key' foi configurado/atualizado.
+2025-06-16 07:57:11|INFO|security_system.AuditLogger_vFINAL|ACTION: set_secret | DETAILS: Segredo 'postgres_local_credentials' foi configurado/atualizado.
+2025-06-16 08:16:58|INFO|security_system.AuditLogger_vFINAL|ACTION: set_secret | DETAILS: Segredo 'minio_local_credentials' foi configurado/atualizado.
+2025-06-16 08:16:58|INFO|security_system.AuditLogger_vFINAL|ACTION: set_secret | DETAILS: Segredo 'openweathermap_api_key' foi configurado/atualizado.
+2025-06-16 08:16:58|INFO|security_system.AuditLogger_vFINAL|ACTION: set_secret | DETAILS: Segredo 'postgres_local_credentials' foi configurado/atualizado.
+2025-06-16 08:31:56|INFO|security_system.AuditLogger_vFINAL|ACTION: set_secret | DETAILS: Segredo 'minio_local_credentials' foi configurado/atualizado.
+2025-06-16 08:31:56|INFO|security_system.AuditLogger_vFINAL|ACTION: set_secret | DETAILS: Segredo 'openweathermap_api_key' foi configurado/atualizado.
+2025-06-16 08:31:56|INFO|security_system.AuditLogger_vFINAL|ACTION: set_secret | DETAILS: Segredo 'postgres_local_credentials' foi configurado/atualizado.

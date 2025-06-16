@@ -1,0 +1,107 @@
+[2025-06-16T09:34:17.937+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-06-16T09:34:17.997+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T09:34:10.946124+00:00 [queued]>
+[2025-06-16T09:34:18.009+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T09:34:10.946124+00:00 [queued]>
+[2025-06-16T09:34:18.010+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-06-16T09:34:18.027+0000] {taskinstance.py:2330} INFO - Executing <Task(BashOperator): submeter_job_spark_seguro> on 2025-06-16 09:34:10.946124+00:00
+[2025-06-16T09:34:18.036+0000] {standard_task_runner.py:63} INFO - Started process 84 to run task
+[2025-06-16T09:34:18.043+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'dag_04_processamento_spark_seguro_v1', 'submeter_job_spark_seguro', 'manual__2025-06-16T09:34:10.946124+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/dag_04_processamento_spark_seguro_v1.py', '--cfg-path', '/tmp/tmpgemkkmv_']
+[2025-06-16T09:34:18.047+0000] {standard_task_runner.py:91} INFO - Job 2: Subtask submeter_job_spark_seguro
+[2025-06-16T09:34:18.156+0000] {task_command.py:426} INFO - Running <TaskInstance: dag_04_processamento_spark_seguro_v1.submeter_job_spark_seguro manual__2025-06-16T09:34:10.946124+00:00 [running]> on host bf5720b39465
+[2025-06-16T09:34:18.327+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='airflow' AIRFLOW_CTX_DAG_ID='dag_04_processamento_spark_seguro_v1' AIRFLOW_CTX_TASK_ID='submeter_job_spark_seguro' AIRFLOW_CTX_EXECUTION_DATE='2025-06-16T09:34:10.946124+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-06-16T09:34:10.946124+00:00'
+[2025-06-16T09:34:18.328+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-06-16T09:34:18.351+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-06-16T09:34:18.352+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', 'python /opt/airflow/scripts/examples/12-processa_vendas.py']
+[2025-06-16T09:34:18.370+0000] {subprocess.py:86} INFO - Output:
+[2025-06-16T09:34:19.446+0000] {subprocess.py:93} INFO - 2025-06-16 09:34:19,446 - INFO - === Iniciando Pipeline de Processamento de Vendas ===
+[2025-06-16T09:34:19.447+0000] {subprocess.py:93} INFO - 2025-06-16 09:34:19,446 - INFO - Iniciando a sessão Spark...
+[2025-06-16T09:34:20.009+0000] {subprocess.py:93} INFO - WARNING: Using incubator modules: jdk.incubator.vector
+[2025-06-16T09:34:22.438+0000] {subprocess.py:93} INFO - :: loading settings :: url = jar:file:/home/airflow/.local/lib/python3.11/site-packages/pyspark/jars/ivy-2.5.3.jar!/org/apache/ivy/core/settings/ivysettings.xml
+[2025-06-16T09:34:22.558+0000] {subprocess.py:93} INFO - Ivy Default Cache set to: /home/airflow/.ivy2.5.2/cache
+[2025-06-16T09:34:22.560+0000] {subprocess.py:93} INFO - The jars for the packages stored in: /home/airflow/.ivy2.5.2/jars
+[2025-06-16T09:34:22.566+0000] {subprocess.py:93} INFO - org.apache.hadoop#hadoop-aws added as a dependency
+[2025-06-16T09:34:22.566+0000] {subprocess.py:93} INFO - com.amazonaws#aws-java-sdk-bundle added as a dependency
+[2025-06-16T09:34:22.568+0000] {subprocess.py:93} INFO - :: resolving dependencies :: org.apache.spark#spark-submit-parent-375351c5-e5d1-455a-b569-26f2900c9604;1.0
+[2025-06-16T09:34:22.568+0000] {subprocess.py:93} INFO - 	confs: [default]
+[2025-06-16T09:34:26.691+0000] {subprocess.py:93} INFO - 	found org.apache.hadoop#hadoop-aws;3.3.4 in central
+[2025-06-16T09:34:28.133+0000] {subprocess.py:93} INFO - 	found com.amazonaws#aws-java-sdk-bundle;1.12.262 in central
+[2025-06-16T09:34:30.637+0000] {subprocess.py:93} INFO - 	found org.wildfly.openssl#wildfly-openssl;1.0.7.Final in central
+[2025-06-16T09:34:30.824+0000] {subprocess.py:93} INFO - downloading https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.4/hadoop-aws-3.3.4.jar ...
+[2025-06-16T09:34:31.466+0000] {subprocess.py:93} INFO - 	[SUCCESSFUL ] org.apache.hadoop#hadoop-aws;3.3.4!hadoop-aws.jar (781ms)
+[2025-06-16T09:34:31.610+0000] {subprocess.py:93} INFO - downloading https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.262/aws-java-sdk-bundle-1.12.262.jar ...
+[2025-06-16T09:35:05.332+0000] {subprocess.py:93} INFO - 	[SUCCESSFUL ] com.amazonaws#aws-java-sdk-bundle;1.12.262!aws-java-sdk-bundle.jar (33861ms)
+[2025-06-16T09:35:05.479+0000] {subprocess.py:93} INFO - downloading https://repo1.maven.org/maven2/org/wildfly/openssl/wildfly-openssl/1.0.7.Final/wildfly-openssl-1.0.7.Final.jar ...
+[2025-06-16T09:35:05.712+0000] {subprocess.py:93} INFO - 	[SUCCESSFUL ] org.wildfly.openssl#wildfly-openssl;1.0.7.Final!wildfly-openssl.jar (375ms)
+[2025-06-16T09:35:05.716+0000] {subprocess.py:93} INFO - :: resolution report :: resolve 8111ms :: artifacts dl 35037ms
+[2025-06-16T09:35:05.719+0000] {subprocess.py:93} INFO - 	:: modules in use:
+[2025-06-16T09:35:05.721+0000] {subprocess.py:93} INFO - 	com.amazonaws#aws-java-sdk-bundle;1.12.262 from central in [default]
+[2025-06-16T09:35:05.723+0000] {subprocess.py:93} INFO - 	org.apache.hadoop#hadoop-aws;3.3.4 from central in [default]
+[2025-06-16T09:35:05.724+0000] {subprocess.py:93} INFO - 	org.wildfly.openssl#wildfly-openssl;1.0.7.Final from central in [default]
+[2025-06-16T09:35:05.725+0000] {subprocess.py:93} INFO - 	---------------------------------------------------------------------
+[2025-06-16T09:35:05.728+0000] {subprocess.py:93} INFO - 	|                  |            modules            ||   artifacts   |
+[2025-06-16T09:35:05.729+0000] {subprocess.py:93} INFO - 	|       conf       | number| search|dwnlded|evicted|| number|dwnlded|
+[2025-06-16T09:35:05.730+0000] {subprocess.py:93} INFO - 	---------------------------------------------------------------------
+[2025-06-16T09:35:05.731+0000] {subprocess.py:93} INFO - 	|      default     |   3   |   3   |   3   |   0   ||   3   |   3   |
+[2025-06-16T09:35:05.732+0000] {subprocess.py:93} INFO - 	---------------------------------------------------------------------
+[2025-06-16T09:35:05.733+0000] {subprocess.py:93} INFO - :: retrieving :: org.apache.spark#spark-submit-parent-375351c5-e5d1-455a-b569-26f2900c9604
+[2025-06-16T09:35:05.750+0000] {subprocess.py:93} INFO - 	confs: [default]
+[2025-06-16T09:35:06.247+0000] {subprocess.py:93} INFO - 	3 artifacts copied, 0 already retrieved (275421kB/520ms)
+[2025-06-16T09:35:06.953+0000] {subprocess.py:93} INFO - 25/06/16 09:35:06 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+[2025-06-16T09:35:07.642+0000] {subprocess.py:93} INFO - Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+[2025-06-16T09:35:07.658+0000] {subprocess.py:93} INFO - Setting default log level to "WARN".
+[2025-06-16T09:35:07.662+0000] {subprocess.py:93} INFO - To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+[2025-06-16T09:35:21.693+0000] {subprocess.py:93} INFO - 2025-06-16 09:35:21,692 - INFO - Sessão Spark criada com sucesso.
+[2025-06-16T09:35:21.694+0000] {subprocess.py:93} INFO - 2025-06-16 09:35:21,692 - INFO - AVISO: Criando um DataFrame de exemplo para demonstração.
+[2025-06-16T09:35:23.604+0000] {subprocess.py:93} INFO - 2025-06-16 09:35:23,603 - INFO - DataFrame de exemplo criado com sucesso.
+[2025-06-16T09:35:23.604+0000] {subprocess.py:93} INFO - 2025-06-16 09:35:23,604 - INFO - Processando para a camada Trusted (Silver)...
+[2025-06-16T09:35:24.190+0000] {subprocess.py:93} INFO - 25/06/16 09:35:24 WARN MetricsConfig: Cannot locate configuration: tried hadoop-metrics2-s3a-file-system.properties,hadoop-metrics2.properties
+[2025-06-16T09:35:24.233+0000] {subprocess.py:93} INFO - 25/06/16 09:35:24 WARN FileSystem: Failed to initialize filesystem s3a://silver/vendas_olist: java.lang.NumberFormatException: For input string: "60s"
+[2025-06-16T09:35:24.284+0000] {subprocess.py:93} INFO - 2025-06-16 09:35:24,276 - ERROR - Erro durante o processamento: For input string: "60s"
+[2025-06-16T09:35:24.284+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-06-16T09:35:24.285+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/examples/12-processa_vendas.py", line 53, in process_sales_data
+[2025-06-16T09:35:24.286+0000] {subprocess.py:93} INFO -     df_trusted.write.mode("overwrite").parquet(output_path_trusted)
+[2025-06-16T09:35:24.289+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/sql/readwriter.py", line 2003, in parquet
+[2025-06-16T09:35:24.290+0000] {subprocess.py:93} INFO -     self._jwrite.parquet(path)
+[2025-06-16T09:35:24.291+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/py4j/java_gateway.py", line 1362, in __call__
+[2025-06-16T09:35:24.292+0000] {subprocess.py:93} INFO -     return_value = get_return_value(
+[2025-06-16T09:35:24.293+0000] {subprocess.py:93} INFO -                    ^^^^^^^^^^^^^^^^^
+[2025-06-16T09:35:24.295+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/errors/exceptions/captured.py", line 288, in deco
+[2025-06-16T09:35:24.296+0000] {subprocess.py:93} INFO -     raise converted from None
+[2025-06-16T09:35:24.298+0000] {subprocess.py:93} INFO - pyspark.errors.exceptions.captured.NumberFormatException: For input string: "60s"
+[2025-06-16T09:35:24.299+0000] {subprocess.py:93} INFO - 2025-06-16 09:35:24,284 - INFO - Sessão Spark encerrada.
+[2025-06-16T09:35:25.037+0000] {subprocess.py:93} INFO - Traceback (most recent call last):
+[2025-06-16T09:35:25.039+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/examples/12-processa_vendas.py", line 96, in <module>
+[2025-06-16T09:35:25.045+0000] {subprocess.py:93} INFO -     main()
+[2025-06-16T09:35:25.046+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/examples/12-processa_vendas.py", line 87, in main
+[2025-06-16T09:35:25.053+0000] {subprocess.py:93} INFO -     process_sales_data(spark, caminho_trusted, caminho_refined)
+[2025-06-16T09:35:25.054+0000] {subprocess.py:93} INFO -   File "/opt/airflow/scripts/examples/12-processa_vendas.py", line 53, in process_sales_data
+[2025-06-16T09:35:25.060+0000] {subprocess.py:93} INFO -     df_trusted.write.mode("overwrite").parquet(output_path_trusted)
+[2025-06-16T09:35:25.061+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/sql/readwriter.py", line 2003, in parquet
+[2025-06-16T09:35:25.061+0000] {subprocess.py:93} INFO -     self._jwrite.parquet(path)
+[2025-06-16T09:35:25.062+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/py4j/java_gateway.py", line 1362, in __call__
+[2025-06-16T09:35:25.066+0000] {subprocess.py:93} INFO -     return_value = get_return_value(
+[2025-06-16T09:35:25.070+0000] {subprocess.py:93} INFO -                    ^^^^^^^^^^^^^^^^^
+[2025-06-16T09:35:25.071+0000] {subprocess.py:93} INFO -   File "/home/airflow/.local/lib/python3.11/site-packages/pyspark/errors/exceptions/captured.py", line 288, in deco
+[2025-06-16T09:35:25.072+0000] {subprocess.py:93} INFO -     raise converted from None
+[2025-06-16T09:35:25.073+0000] {subprocess.py:93} INFO - pyspark.errors.exceptions.captured.NumberFormatException: For input string: "60s"
+[2025-06-16T09:35:25.074+0000] {subprocess.py:93} INFO - 2025-06-16 09:35:25,064 - INFO - Closing down clientserver connection
+[2025-06-16T09:35:25.694+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-06-16T09:35:25.696+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-06-16T09:35:25.729+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/bash.py", line 243, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-06-16T09:35:25.739+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=dag_04_processamento_spark_seguro_v1, task_id=submeter_job_spark_seguro, run_id=manual__2025-06-16T09:34:10.946124+00:00, execution_date=20250616T093410, start_date=20250616T093417, end_date=20250616T093525
+[2025-06-16T09:35:25.768+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 2 for task submeter_job_spark_seguro (Bash command failed. The command returned a non-zero exit code 1.; 84)
+[2025-06-16T09:35:25.811+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-06-16T09:35:25.843+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-06-16T09:35:25.845+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
