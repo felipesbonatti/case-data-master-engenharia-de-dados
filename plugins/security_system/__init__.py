@@ -1,0 +1,1 @@
+# Deixá-lo vazio é a abordagem mais segura para evitar erros de importação do plugin manager.
