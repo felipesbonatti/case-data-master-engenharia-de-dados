@@ -1,0 +1,195 @@
+# ===================================================================================
+# DOCKER COMPOSE: AMBIENTE APACHE AIRFLOW PARA ENGENHARIA DE DADOS 
+# ===================================================================================
+
+# DESCRICAO:
+# Este arquivo Docker Compose define e orquestra um ambiente completo e robusto
+# para o Apache Airflow, essencial para pipelines de Engenharia de Dados de nivel
+# enterprise. Ele integra servicos criticos como PostgreSQL (banco de metadados e
+# Data Warehouse/Mart), MinIO (Data Lake) e Redis (broker Celery), alem de
+# componentes do Airflow como Webserver e Scheduler.
+
+# OBJETIVO PRINCIPAL:
+# - Prover um ambiente de desenvolvimento e producao escalavel para o Airflow.
+# - Garantir a persistencia de dados do PostgreSQL, MinIO e Redis.
+# - Estabelecer uma rede isolada para a comunicacao segura entre os servicos.
+# - Gerenciar a ordem de inicializacao e a saude dos servicos via healthchecks e dependencias.
+# - Facilitar a gestao de credenciais e logs atraves de volumes mapeados para o host.
+
+# ARQUITETURA DE SERVICOS:
+# - PostgreSQL: Banco de dados relacional (metadados Airflow, Data Mart).
+# - MinIO: Armazenamento de objetos compativel com S3 (Data Lake: Bronze, Silver, Gold Layers).
+# - Redis: Broker de mensagens para o CeleryExecutor (opcional, se `executor` no airflow.cfg for CeleryExecutor).
+# - Airflow Webserver: Interface de usuario e API do Airflow.
+# - Airflow Scheduler: Orquestrador de DAGs.
+# - Volumes Nomeados: Para persistencia de dados de bancos e armazenamento de objetos.
+# - Rede Customizada: Para comunicacao isolada e segura entre os servicos.
+
+# SEGURANCA E ROBUSTEZ:
+# - Healthchecks: Monitoram a disponibilidade e saude de cada servico.
+# - `depends_on`: Garante a ordem correta de inicializacao entre os servicos.
+# - `restart: unless-stopped`: Reinicia servicos automaticamente em caso de falha.
+# - Variaveis de Ambiente: Credenciais e configuracoes sao carregadas de um arquivo `.env`
+#   (ex: `.env.example`), promovendo a seguranca e a externalizacao de configuracoes.
+# - Volumes Mapeados: Permitem a persistencia de logs, DAGs, plugins e dados entre o host e os conteineres.
+# - Dockerfile Customizado: Para instalar dependencias PySpark e configurar o ambiente Airflow.
+
+# ===================================================================================
+
+version: '3.8' # Especifica a versao da sintaxe do Docker Compose
+
+services:
+  # ===================================================================
+  # SERVICO: POSTGRESQL (BANCO DE DADOS DE METADADOS E DATA WAREHOUSE/MART)
+  # ===================================================================
+  postgres: # Nome do servico Docker Compose (usado por outros conteineres)
+    image: postgres:13-alpine # Imagem oficial do PostgreSQL (versao leve)
+    container_name: postgres_data_warehouse # Nome para o conteiner (diferente do nome do servico para clareza)
+    restart: unless-stopped # Reinicia o conteiner automaticamente a menos que seja parado explicitamente
+    environment: # Variaveis de ambiente para configuracao do PostgreSQL
+      POSTGRES_USER: ${POSTGRES_USER:-airflow_user} # Usuario, padrao `airflow_user` se nao definido no .env
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-secure_password_2024} # Senha, padrao `secure_password_2024` 
+      POSTGRES_DB: ${POSTGRES_DB:-airflow_warehouse} # Nome do banco de dados, padrao `airflow_warehouse`
+    ports: # Mapeamento de portas (HOST:CONTAINER)
+      - "${POSTGRES_PORT:-5432}:5432" # Porta 5432 do conteiner exposta na porta 5432 do host (padrao)
+    volumes: # Mapeamento de volumes para persistencia de dados
+      - postgres_data:/var/lib/postgresql/data # Volume nomeado para dados persistentes do PostgreSQL
+    networks: # Conecta o servico a rede customizada
+      - data_pipeline_network
+    healthcheck: # Define um healthcheck para monitorar a saude do servico
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-airflow_user} -d ${POSTGRES_DB:-airflow_warehouse}"] # Testa se o DB esta pronto para conexoes
+      interval: 10s # Frequencia do teste
+      timeout: 5s # Tempo limite para cada teste
+      retries: 5 # Numero de retries antes de considerar o servico unhealthy
+      start_period: 30s # Periodo inicial para o conteiner inicializar antes de comecar a testar
+
+  # ===================================================================
+  # SERVICO: MINIO (DATA LAKE - ARMAZENAMENTO DE OBJETOS COMPATIVEL COM S3)
+  # ===================================================================
+  minio: # Nome do servico Docker Compose
+    image: minio/minio:latest # Imagem oficial do MinIO
+    container_name: minio_object_storage # Nome para o conteiner
+    restart: unless-stopped # Reinicia automaticamente
+    environment: # Variaveis de ambiente para configuracao do MinIO
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-admin} # Usuario root do MinIO, padrao `admin` 
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minio_secure_2024} # Senha root do MinIO, padrao `minio_secure_2024` 
+    ports: # Mapeamento de portas
+      - "${MINIO_API_PORT:-9000}:9000" # Porta da API do MinIO
+      - "${MINIO_CONSOLE_PORT:-9001}:9001" # Porta do console web do MinIO
+    volumes: # Mapeamento de volumes para persistencia de dados
+      - minio_data:/data # Volume nomeado para dados persistentes do MinIO
+    networks: # Conecta o servico a rede customizada
+      - data_pipeline_network
+    command: server /data --console-address ":9001" # Comando para iniciar o servidor MinIO e o console
+    healthcheck: # Define um healthcheck para monitorar a saude do MinIO
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"] # Testa a rota de saude da API MinIO
+      interval: 15s # Frequencia do teste
+      timeout: 10s # Tempo limite para cada teste
+      retries: 3 # Numero de retries
+      start_period: 40s # Periodo inicial para o conteiner inicializar
+
+  # ===================================================================
+  # SERVICO: REDIS (BROKER DE MENSAGENS PARA CELERY)
+  # ===================================================================
+  redis: # Nome do servico Docker Compose
+    image: redis:7-alpine # Imagem oficial do Redis (versao leve)
+    container_name: redis_cache_layer # Nome para o conteiner
+    restart: unless-stopped # Reinicia automaticamente
+    ports: # Mapeamento de portas
+      - "${REDIS_PORT:-6379}:6379" # Porta 6379 do conteiner exposta na porta 6379 do host (padrao)
+    volumes: # Mapeamento de volumes para persistencia de dados
+      - redis_data:/data # Volume nomeado para dados persistentes do Redis
+    networks: # Conecta o servico a rede customizada
+      - data_pipeline_network
+    command: redis-server # Comando para iniciar o servidor Redis
+    healthcheck: # Define um healthcheck para monitorar a saude do Redis
+      test: ["CMD", "redis-cli", "ping"] # Testa a conectividade com o Redis
+      interval: 10s # Frequencia do teste
+      timeout: 5s # Tempo limite para cada teste
+      retries: 3 # Numero de retries
+      start_period: 20s # Periodo inicial para o conteiner inicializar
+
+  # ===================================================================
+  # SERVICO: AIRFLOW WEBSERVER (INTERFACE DO USUARIO E API)
+  # ===================================================================
+  airflow-webserver:
+    build: . # Constroi a imagem Docker a partir do Dockerfile no diretorio atual
+    container_name: airflow_webserver # Nome
+    restart: unless-stopped # Reinicia automaticamente
+    depends_on: # Define dependencias de inicializacao
+      postgres: # Depende do servico 'postgres' (nome do servico, nao container_name)
+        condition: service_healthy # Espera o servico `postgres` estar saudavel
+      redis: # Depende do servico 'redis' (nome do servico, nao container_name)
+        condition: service_healthy # Espera o servico `redis` estar saudavel
+    env_file: # Carrega variaveis de ambiente de um arquivo
+      - .env # ARQUIVO CORRETO: Carrega variaveis como SECURITY_VAULT_SECRET_KEY, POSTGRES_USER, etc.
+    volumes: # Mapeamento de volumes para persistencia e compartilhamento de codigo
+      - ./dags:/opt/airflow/dags # DAGs do host para o conteiner
+      - ./plugins:/opt/airflow/plugins # Plugins customizados do host para o conteiner (ex: security_system)
+      - ./logs:/opt/airflow/logs # Logs do Airflow do conteiner para o host
+      - ./scripts:/opt/airflow/scripts # Scripts auxiliares do host para o conteiner
+      - ./data:/opt/airflow/data # Dados (datasets, vault) do host para o conteiner
+      - ./init-scripts/entrypoint.sh:/opt/airflow/entrypoint.sh # Script de entrypoint customizado
+      - ./airflow.cfg:/opt/airflow/airflow.cfg # Arquivo de configuracao customizado do Airflow
+    ports: # Mapeamento de portas para acessar a UI do Airflow
+      - "8080:8080" # Porta 8080 do conteiner exposta na porta 8080 do host
+    networks: # Conecta o servico a rede customizada
+      - data_pipeline_network
+    command: webserver # Comando padrao para iniciar o Webserver do Airflow
+    entrypoint: /opt/airflow/entrypoint.sh # Script de entrypoint customizado para inicializacao robusta
+    healthcheck: # Healthcheck para monitorar a saude do Webserver
+      test: ["CMD-SHELL", "curl --fail http://localhost:8080/health"] # Testa o endpoint de saude do Airflow
+      interval: 30s # Frequencia do teste
+      timeout: 10s # Tempo limite para cada teste
+      retries: 5 # Numero de retries
+      start_period: 60s # Periodo inicial para o conteiner inicializar
+
+  # ===================================================================
+  # SERVICO: AIRFLOW SCHEDULER (ORQUESTRADOR DE DAGS)
+  # ===================================================================
+  airflow-scheduler:
+    build: . # Constroi a imagem a partir do Dockerfile (mesma imagem do webserver)
+    container_name: airflow_scheduler # Nome
+    restart: unless-stopped # Reinicia automaticamente
+    depends_on: # Define dependencias de inicializacao
+      airflow-webserver:
+        condition: service_healthy # Espera o `airflow-webserver` estar saudavel
+    env_file: # Carrega variaveis de ambiente
+      - .env # ARQUIVO CORRETO: Carrega variaveis como SECURITY_VAULT_SECRET_KEY, POSTGRES_USER, etc.
+    volumes: # Mapeamento de volumes (deve ser identico ao do webserver para consistencia)
+      - ./dags:/opt/airflow/dags
+      - ./plugins:/opt/airflow/plugins
+      - ./logs:/opt/airflow/logs
+      - ./scripts:/opt/airflow/scripts
+      - ./data:/opt/airflow/data
+      - ./init-scripts/entrypoint.sh:/opt/airflow/entrypoint.sh
+      - ./airflow.cfg:/opt/airflow/airflow.cfg
+    networks: # Conecta o servico a rede customizada
+      - data_pipeline_network
+    command: scheduler # Comando padrao para iniciar o Scheduler do Airflow
+    entrypoint: /opt/airflow/entrypoint.sh # Script de entrypoint customizado
+
+# ===================================================================
+# VOLUMES: PARA PERSISTENCIA DE DADOS ENTRE REINICIOS DE CONTEINERES
+# ===================================================================
+volumes:
+  postgres_data:
+    driver: local # Usa o driver de volume local do Docker
+    name: pipeline_postgres_data # Nome para o volume do PostgreSQL
+  minio_data:
+    driver: local
+    name: pipeline_minio_data # Nome para o volume do MinIO
+  redis_data:
+    driver: local
+    name: pipeline_redis_data # Nome para o volume do Redis
+
+# ===================================================================
+# REDES: PARA COMUNICACAO ISOLADA ENTRE OS SERVICOS
+# ===================================================================
+networks:
+  data_pipeline_network:
+    driver: bridge # Tipo de rede (rede padrao do Docker)
+    name: enterprise_data_network # Nome para a rede
+    ipam: # Configuracao de Gerenciamento de Enderecos IP (IP Address Management)
+      config:
+        - subnet: 172.20.0.0/16 # Define a sub-rede para a rede, garantindo IPs previsiveis e isolamento
