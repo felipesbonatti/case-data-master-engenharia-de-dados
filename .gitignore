@@ -1,0 +1,58 @@
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Configs locais e caches
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Arquivos do Airflow que podem conter informações sensíveis
+airflow.cfg
+webserver_config.py
+
+# Ambientes virtuais
+.env
+.venv/
+env/
+venv/
+
+# Credenciais, tokens e chaves
+*.key
+*.pem
+*.crt
+*.env
+credentials.json
+secrets.json
+
+# Arquivos de IDEs
+.vscode/
+.idea/
+
+# Arquivos temporários
+*.bak
+*.tmp
+*.swp
+
+# Repositórios de dados locais
+*.sqlite
+*.db
+*.csv
+*.parquet
+*.zip
+*.tar
+*.gz
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Evita subir arquivos de teste e scripts locais
+test_*.py
+
+# Arquivos do projeto que devem ser ignorados
+.DS_Store
+airflow-webserver.pid
+security_vault.db
+security_vault.db-shm
+ 
